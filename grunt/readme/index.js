@@ -4,10 +4,11 @@ const m = require('match-file-utility');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
+const linkLicense = require('./linkLicense');
 
 function capitalCase(string) {
-  var spaced = string.trim().replace(/-|_/g, ' ').split(' ');
-  var s = spaced.map(function (a) {
+  let spaced = string.trim().replace(/-|_/g, ' ').split(' ');
+  let s = spaced.map(function (a) {
     return /^[A-Z]/.test(a) ? a : a[0].toUpperCase() + a.substr(1).toLowerCase();
   }).join(' ');
 
@@ -24,7 +25,7 @@ function exists(file) {
 }
 
 function task(callback) {
-  const test = require('../test/');
+  const test = require('../../test/');
 
   const source = config.isSite
     ? 'src/application/readme/'
@@ -47,7 +48,8 @@ function task(callback) {
 
   test.then(function (object) {
     text.push('# ' + capitalCase(pkg.name) + ' ' + pkg.version);
-    text.push('#### License: ' + pkg.license || 'MIT License');
+
+    text.push('#### License: ' + linkLicense(pkg.license || 'MIT'));
 
     text.push('');
 
@@ -86,7 +88,7 @@ function task(callback) {
     }
 
     content.forEach(function (a) {
-      var name = path.basename(a).replace(/\.md$/, '');
+      let name = path.basename(a).replace(/\.md$/, '');
       text.push('- [' + name + '](#' + _.kebabCase(name.toLowerCase()) + '--top)');
     });
 
@@ -120,8 +122,8 @@ function task(callback) {
     text.push('');
 
     content.forEach(function (a) {
-      var string = fs.readFileSync(a, 'utf8');
-      var name = path.basename(a).replace(/\.md$/, '');
+      let string = fs.readFileSync(a, 'utf8');
+      let name = path.basename(a).replace(/\.md$/, '');
       text.push('### ' + name + ' ... \([top](#table-of-contents)\)');
       text.push('');
       text.push(string);
