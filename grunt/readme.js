@@ -109,6 +109,7 @@ module.exports = {
           text.push(string);
         });
 
+
         fs.writeFileSync('README.md', text.join('\n'));
       });
   }
