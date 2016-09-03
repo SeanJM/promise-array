@@ -11,6 +11,10 @@
 
 ***
 
+## Table of Contents
+- [filter](#filter--top)
+- [forEach](#foreach--top)
+- [map](#map--top)
 ## Description
 A small library providing asynchronous array methods for promises.
 
@@ -49,10 +53,6 @@ PromiseList(listOfPromises)
   )
 ```
 
-## Table of Contents
-- [filter](#filter-top)
-- [forEach](#for-each-top)
-- [map](#map-top)
 
 ***
 

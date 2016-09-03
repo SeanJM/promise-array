@@ -50,6 +50,13 @@ module.exports = {
         text.push('***');
         text.push('');
 
+        text.push('## Table of Contents');
+
+        content.forEach(function (a) {
+          var name = path.basename(a).replace(/\.md$/, '');
+          text.push('- [' + name + '](#' + _.kebabCase(name.toLowerCase()) + '--top)');
+        });
+
         text.push('## Description');
 
         if (description) {
@@ -72,12 +79,6 @@ module.exports = {
           text.push(fs.readFileSync(example, 'utf8'));
         }
 
-        text.push('## Table of Contents');
-
-        content.forEach(function (a) {
-          var name = path.basename(a).replace(/\.md$/, '');
-          text.push('- [' + name + '](#' + _.kebabCase(name) + '--top)');
-        });
 
         text.push('');
         text.push('***');
