@@ -1,5 +1,5 @@
 # Promise Array 1.0.1
-#### License: MIT
+#### License: [MIT](https://opensource.org/licenses/MIT)
 
 #### ✅ All 12 tests pass
 
