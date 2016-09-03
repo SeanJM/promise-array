@@ -3,13 +3,15 @@ const colors = require('colors');
 
 function TinyTest(callback) {
   var self = this;
+  var index = 1;
 
   function test(name) {
     var test_instance = new Test(
       {
         name : name,
         passed : self.passed,
-        failed : self.failed
+        failed : self.failed,
+        index : index++
       }
     );
 
@@ -32,33 +34,31 @@ function TinyTest(callback) {
   };
 
   setTimeout(function () {
-
-    self.log(
-      '\nStarting' + ' tinyTest...'.green
-    );
-
     callback(test);
 
-    self.log('Loading tests (' + self.list_tests.length.toString().cyan + ')\n');
+    self.log('\n Loading tests (' + self.list_tests.length.toString().cyan + ')\n');
 
     Promise.all(self.list_tests)
-      .then(self.complete());
-  }, 1);
+      .then(self.complete())
+      .catch(function (error) {
+        self.reject(error);
+      });
+  }, 20);
 }
 
 TinyTest.prototype.printFail = function () {
-  let total = (this.passed.length + this.failed.length);
-  let perc = Math.round((this.failed.length / total) * 100).toString() + '%';
+  let total = (this.int_passed + this.int_failed);
+  let perc = Math.round((this.int_failed / total) * 100).toString() + '%';
   this.log(
-    '\n -'.red + ' Failed: ' + this.failed.length + '/' + total + ' (' + perc.cyan + ')'
+    '\n -'.red + ' Failed: ' + this.int_failed + '/' + total + ' (' + perc.cyan + ')'
   );
 };
 
 TinyTest.prototype.printPass = function () {
   this.log(
-    this.passed.length > 1
-      ? '\n +'.green + ' All ' + this.passed.length + ' tests passed'
-      : '\n + '.green + this.passed.length + ' test passed'
+    this.int_passed > 1
+      ? '\n +'.green + ' All ' + this.int_passed + ' tests passed'
+      : '\n + '.green + this.int_passed + ' test passed'
   );
 };
 
@@ -75,19 +75,20 @@ TinyTest.prototype.complete = function () {
   return function () {
     self.date_complete = new Date();
 
-    self.passed.forEach(
-      function (message) {
-        self.log(message);
-      }
-    );
+    self.int_failed = 0;
+    self.int_passed = 0;
 
-    self.failed.forEach(
-      function (message) {
-        self.log(message);
-      }
-    );
+    for (var k in self.passed) {
+      self.log(self.passed[k]);
+      self.int_passed += 1;
+    }
 
-    if (self.failed.length) {
+    for (k in self.failed) {
+      self.log(self.failed[k]);
+      self.int_failed += 1;
+    }
+
+    if (Object.keys(self.failed).length) {
       self.printFail();
     } else {
       self.printPass();
@@ -99,18 +100,26 @@ TinyTest.prototype.complete = function () {
 };
 
 TinyTest.prototype.then = function (callback) {
-  this.method.resolve.push(callback);
+  this.method.resolve.push(
+    callback
+  );
+
+  return this;
 };
 
 TinyTest.prototype.catch = function (callback) {
-  this.method.reject.push(callback);
+  this.method.reject.push(
+    callback
+  );
+
+  return this;
 };
 
 TinyTest.prototype.resolve = function () {
   var opt = {
-    failed : this.failed.length,
-    passed : this.passed.length,
-    total : this.failed.length + this.passed.length
+    failed : this.int_failed,
+    passed : this.int_passed,
+    total : this.int_failed + this.int_passed
   };
 
   this.method.resolve.forEach(
@@ -118,6 +127,24 @@ TinyTest.prototype.resolve = function () {
       callback(opt);
     }
   );
+
+  this.method = {
+    resolve : [],
+    reject : []
+  };
+};
+
+TinyTest.prototype.reject = function (error) {
+  this.method.resolve.forEach(
+    function (callback) {
+      callback(error);
+    }
+  );
+
+  this.method = {
+    resolve : [],
+    reject : []
+  };
 };
 
 TinyTest.prototype.silence = function () {

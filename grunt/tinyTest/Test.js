@@ -1,6 +1,6 @@
 const isTypeEqual = require('./predicates/isTypeEqual');
-const typeToString = require('./typeToString');
-const maybePromise = require('../maybePromise');
+const typeToString = require('./utilities/typeToString');
+const maybePromise = require('../lib/maybePromise');
 
 function padRight(a, n, c) {
   a = typeof a === 'string'
@@ -27,6 +27,7 @@ function Test(opt) {
 
   this.passed = opt.passed;
   this.failed = opt.failed;
+  this.index = opt.index;
 
   this.method = {
     resolve : [],
@@ -35,14 +36,14 @@ function Test(opt) {
 }
 
 Test.prototype.pass = function () {
-  this.passed.push(
-    padRight(this.name + ' ', 72, '.'.grey) + ' PASSED'.green
+  this.passed[this.index] = (
+    padLeft(this.index + '. ', 6, ' ') + padRight(this.name + ' ', 66, '.'.grey) + ' PASSED'.green
   );
 };
 
 Test.prototype.fail = function () {
-  this.failed.push(
-    '\n' + padRight(this.name + ' ', 72, '.').red + ' FAILED'.red +
+  this.failed[this.index] = (
+    '\n' + padLeft(this.index + '. ', 6, ' ') + padRight(this.name + ' ', 66, '.').red + ' FAILED'.red +
     '\n +'.green + ' Expected: ' + padLeft(typeToString(this.b), 66, ' ').grey +
     '\n -'.red + '   Actual: ' + padLeft(typeToString(this.a), 66, ' ').grey
   );
