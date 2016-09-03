@@ -1,0 +1,5 @@
+{
+  "esnext" : true,
+  "laxbreak" : true,
+  "laxcomma" : true
+}

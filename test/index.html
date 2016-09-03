@@ -1,0 +1,44 @@
+<html>
+  <body>
+    <script src="../bin/PromiseList.js"></script>
+    <script>
+    Promise.List = PromiseList;
+    function timedPromise(n) {
+      return {
+        resolve : function () {
+          return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+              resolve(n);
+            }, n);
+          });
+        },
+        reject : function () {
+          return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+              reject(n);
+            }, n);
+          });
+        }
+      };
+    }
+
+    new Promise.List([
+      timedPromise(300).resolve(),
+      timedPromise(100).resolve(),
+      timedPromise(200).resolve()
+    ])
+      .map(function (value) {
+        throw 'test';
+      })
+      .filter(function (value) {
+        return true;
+      })
+      .then(function (value) {
+        console.log(value);
+      })
+      .catch(function (value) {
+        console.log(value);
+      });
+    </script>
+  </body>
+</html>
