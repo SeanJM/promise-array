@@ -49,7 +49,7 @@ PromiseList(listOfPromises)
   )
 ```
 
-## Table of Contents (3)
+## Table of Contents
 - [filter](#filter-top)
 - [forEach](#for-each-top)
 - [map](#map-top)

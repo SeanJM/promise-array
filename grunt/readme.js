@@ -72,7 +72,7 @@ module.exports = {
           text.push(fs.readFileSync(example, 'utf8'));
         }
 
-        text.push('## Table of Contents (' + content.length + ')');
+        text.push('## Table of Contents');
 
         content.forEach(function (a) {
           var name = path.basename(a).replace(/\.md$/, '');
