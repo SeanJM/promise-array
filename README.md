@@ -8,6 +8,7 @@
 #### Overview
 
 - [Description](#description)
+- [Installation](#installation)
 - [Notes](#notes)
 - [Example](#example)
 
@@ -21,7 +22,14 @@
 
 A small library providing asynchronous array methods for promises.
 
-### NPM
+
+## Installation
+
+### Browser
+Just download the `PromiseList.min.js` and include it in an HTML `<script>` tag
+eg: `<script src="PromiseList.min.js"></script>`
+
+### Node
 ```bash
 npm i -S promise-array
 ```
