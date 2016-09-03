@@ -32,9 +32,9 @@ module.exports = {
         text.push('');
 
         if (object.passed === object.total) {
-          text.push('#### Tests : ✅ All ' + object.total + ' tests pass');
+          text.push('#### ✅ All ' + object.total + ' tests pass');
         } else {
-          text.push('#### Tests: 🚫 ' + object.passed + ' of ' + object.total + ' tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
+          text.push('#### 🚫 ' + object.passed + ' of ' + object.total + ' tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
         }
 
         text.push('');
