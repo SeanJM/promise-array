@@ -1,6 +1,10 @@
 const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('package.json')).gruntBuild;
 
+const root = config.isSite
+  ? 'src/application/'
+  : 'src/';
+
 try {
   fs.statSync('src/');
 } catch (e) {
@@ -29,27 +33,27 @@ try {
     // Set up the folder structure for sites
     fs.mkdirSync('src/shared/');
 
-    fs.mkdirSync('src/application/');
+    fs.mkdirSync(root);
 
-    fs.mkdirSync('src/application/scripts');
-    fs.mkdirSync('src/application/scripts/constants');
-    fs.mkdirSync('src/application/scripts/custom');
-    fs.mkdirSync('src/application/scripts/init');
-    fs.mkdirSync('src/application/scripts/predicates');
-    fs.mkdirSync('src/application/scripts/vendor');
-    fs.mkdirSync('src/application/scripts/exports');
+    fs.mkdirSync(root + 'scripts');
+    fs.mkdirSync(root + 'scripts/constants');
+    fs.mkdirSync(root + 'scripts/custom');
+    fs.mkdirSync(root + 'scripts/init');
+    fs.mkdirSync(root + 'scripts/predicates');
+    fs.mkdirSync(root + 'scripts/vendor');
+    fs.mkdirSync(root + 'scripts/exports');
 
-    fs.mkdirSync('src/application/styles');
-    fs.mkdirSync('src/application/styles/constants');
-    fs.mkdirSync('src/application/styles/custom');
-    fs.mkdirSync('src/application/styles/functions');
-    fs.mkdirSync('src/application/styles/placeholders');
-    fs.mkdirSync('src/application/styles/vendor');
+    fs.mkdirSync(root + 'styles');
+    fs.mkdirSync(root + 'styles/constants');
+    fs.mkdirSync(root + 'styles/custom');
+    fs.mkdirSync(root + 'styles/functions');
+    fs.mkdirSync(root + 'styles/placeholders');
+    fs.mkdirSync(root + 'styles/vendor');
 
-    fs.mkdirSync('src/application/components');
-    fs.mkdirSync('src/application/containers');
-    fs.mkdirSync('src/application/images');
-    fs.mkdirSync('src/application/fonts');
+    fs.mkdirSync(root + 'components');
+    fs.mkdirSync(root + 'containers');
+    fs.mkdirSync(root + 'images');
+    fs.mkdirSync(root + 'fonts');
 
     fs.mkdirSync('src/flatman/');
     fs.mkdirSync('src/flatman/pages');
@@ -57,19 +61,35 @@ try {
     fs.mkdirSync('src/flatman/content');
   } else {
     // Set up the folder structure for plugins
-    fs.mkdirSync('src/vendor/');
-    fs.mkdirSync('src/custom/');
-    fs.mkdirSync('src/constants/');
-    fs.mkdirSync('src/predicates/');
-    fs.mkdirSync('src/init/');
-    fs.mkdirSync('src/exports/');
-    fs.mkdirSync('src/readme/');
+    fs.mkdirSync(root + 'vendor/');
+    fs.mkdirSync(root + 'custom/');
+    fs.mkdirSync(root + 'constants/');
+    fs.mkdirSync(root + 'predicates/');
+    fs.mkdirSync(root + 'init/');
+    fs.mkdirSync(root + 'exports/');
+    fs.mkdirSync(root + 'readme/');
+  }
 
+  fs.writeFileSync(
+    root + 'readme/description.md',
+    '<!--' +
+    '  Describe to the world what you toiled over. You magnificent being.' +
+    '  (The title \'Is going to be generated\')' +
+    '-->'
+  );
+
+  fs.writeFileSync(
+    root + 'readme/notes.md',
+    '<!--' +
+    '  Anything \'notable\' that the user should know' +
+    '-->'
+  );
+
+  if (!congig.isSite) {
     fs.writeFileSync(
-      'src/readme/description.md',
+      root + 'readme/example.md',
       '<!--' +
-      '  Describe to the world what you toiled over. You magnificent being.' +
-      '  (The title \'Is going to be generated\')' +
+      '  An brief example which showcases your plugin' +
       '-->'
     );
   }
