@@ -52,9 +52,24 @@ module.exports = {
 
         text.push('## Table of Contents');
 
+        text.push('');
+        text.push('#### Overview');
+        text.push('');
+
         text.push('- [Description](#description)');
+
         if (notes) {
           text.push('- [Notes](#notes)');
+        }
+
+        if (example) {
+          text.push('- [Example](#example)');
+        }
+
+        if (content.length) {
+          text.push('');
+          text.push('#### Content');
+          text.push('');
         }
 
         content.forEach(function (a) {

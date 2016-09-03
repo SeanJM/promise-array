@@ -12,8 +12,15 @@
 ***
 
 ## Table of Contents
+
+#### Overview
+
 - [Description](#description)
 - [Notes](#notes)
+- [Example](#example)
+
+#### Content
+
 - [filter](#filter--top)
 - [forEach](#foreach--top)
 - [map](#map--top)
