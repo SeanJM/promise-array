@@ -3,8 +3,6 @@
 
 #### ✅ All 12 tests pass
 
-———
-
 ## Table of Contents
 
 #### Overview
@@ -58,8 +56,6 @@ PromiseList(listOfPromises)
   )
 ```
 
-
-———
 
 ### filter ... ([top](#table-of-contents))
 

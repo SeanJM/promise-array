@@ -4,7 +4,7 @@ const m = require('match-file-utility');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
-const HR = '———';
+
 module.exports = {
   glob : ['src/readme/**/*.md'],
   task : function () {
@@ -37,8 +37,6 @@ module.exports = {
           text.push('#### 🚫 ' + object.passed + ' of ' + object.total + ' tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
         }
 
-        text.push('');
-        text.push(HR);
         text.push('');
 
         text.push('## Table of Contents');
@@ -92,9 +90,6 @@ module.exports = {
           text.push(fs.readFileSync(example, 'utf8'));
         }
 
-
-        text.push('');
-        text.push(HR);
         text.push('');
 
         content.forEach(function (a) {
