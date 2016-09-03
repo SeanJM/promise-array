@@ -37,8 +37,9 @@ module.exports = {
           '</span>'
         );
 
-        text.push('Passed: ' + object.passed);
-        text.push('Failed: ' + object.failed);
+        text.push('');
+        text.push('- Passed: ' + object.passed);
+        text.push('- Failed: ' + object.failed);
 
         text.push('***');
 

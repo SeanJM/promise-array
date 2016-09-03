@@ -4,8 +4,9 @@
 ***
 ### Tests
 <span style="display: inline-block; width: 100px; position: relative; height: 30px; background: rgb(220, 225, 236)"><span style="width: 1%; background: rgb(0, 195, 100); height : 100%;"></span><span style="width: 0%; background: rgb(195, 0, 100); height : 100%;"></span></span>
-Passed: 12
-Failed: 0
+
+- Passed: 12
+- Failed: 0
 ***
 ## Description
 A small library providing asynchronous array methods for promises.
