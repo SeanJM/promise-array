@@ -1,4 +1,8 @@
-const TinyTest = require('../grunt/lib/tinyTest');
+const TinyTest = require('../grunt/tinyTest');
+const fs = require('fs');
+const pkg = JSON.parse(fs.readFileSync('package.json'));
+const config = pkg.gruntBuild;
+const colors = require('colors');
 
 function timedPromise(n) {
   return {
@@ -20,7 +24,11 @@ function timedPromise(n) {
 }
 
 module.exports = new TinyTest(function (test) {
-  Promise.List = require('../bin/PromiseList');
+  if (config.isProduction) {
+    Promise.List = require('../bin/PromiseList.min');
+  } else {
+    Promise.List = require('../bin/PromiseList');
+  }
 
   test('Promise.List: map (undefined)')
     .this(
