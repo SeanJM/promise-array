@@ -76,7 +76,7 @@ module.exports = {
 
         content.forEach(function (a) {
           var name = path.basename(a).replace(/\.md$/, '');
-          text.push('- [' + name + '](#' + _.kebabCase(name) + '-top)');
+          text.push('- [' + name + '](#' + _.kebabCase(name) + '--top)');
         });
 
         text.push('');
