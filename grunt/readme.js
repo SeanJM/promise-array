@@ -30,10 +30,8 @@ module.exports = {
         text.push('#### License: ' + pkg.license || 'MIT License');
 
         text.push('');
-        text.push('***');
-        text.push('');
 
-        text.push('### Tests');
+        text.push('#### Tests');
 
         text.push(
           '<span style="display: inline-block; width: 100px; position: relative; height: 30px; background: rgb(220, 225, 236)">' +
