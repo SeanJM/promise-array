@@ -19,8 +19,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('flatman', flatman.task);
-  grunt.registerTask('readme', readme.task);
-  grunt.registerTask('default', tasks);
+  grunt.registerTask('flatman', function () {
+    flatman.task(this.async());
+  });
 
+  grunt.registerTask('readme', function () {
+    readme.task(this.async());
+  });
+
+  grunt.registerTask('default', tasks);
 };
