@@ -31,18 +31,7 @@ module.exports = {
 
         text.push('');
 
-        text.push('#### Tests');
-
-        text.push(
-          '<span style="display: inline-block; width: 100px; position: relative; height: 30px; background: rgb(220, 225, 236)">' +
-            '<span style="width: ' + object.passed / object.total + '%; background: rgb(0, 195, 100); height : 100%;"></span>' +
-            '<span style="width: ' + object.failed / object.total + '%; background: rgb(195, 0, 100); height : 100%;"></span>' +
-          '</span>'
-        );
-
-        text.push('');
-        text.push('- Passed: ' + object.passed);
-        text.push('- Failed: ' + object.failed);
+        text.push('Tests passed ' + object.passed + ' of ' + object.total + ' (' + Math.round(object.passed / object.total) + '%)');
 
         text.push('');
         text.push('***');
