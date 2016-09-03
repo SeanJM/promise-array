@@ -52,12 +52,19 @@ module.exports = {
 
         text.push('## Table of Contents');
 
+        text.push('- [Description](#description)');
+        if (notes) {
+          text.push('- [Notes](#notes)');
+        }
+
         content.forEach(function (a) {
           var name = path.basename(a).replace(/\.md$/, '');
           text.push('- [' + name + '](#' + _.kebabCase(name.toLowerCase()) + '--top)');
         });
 
+        text.push('');
         text.push('## Description');
+        text.push('');
 
         if (description) {
           text.push(fs.readFileSync(description, 'utf8'));

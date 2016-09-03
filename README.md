@@ -12,10 +12,14 @@
 ***
 
 ## Table of Contents
+- [Description](#description)
+- [Notes](#notes)
 - [filter](#filter--top)
 - [forEach](#foreach--top)
 - [map](#map--top)
+
 ## Description
+
 A small library providing asynchronous array methods for promises.
 
 
