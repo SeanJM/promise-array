@@ -16,8 +16,10 @@ module.exports = {
 
     let files = m(source, /\.md$/);
 
-    let description = files.filter(a => /description\.md/.test(a))[0];
-    let content = files.filter(a => !/description\.md/.test(a));
+    let description = files.filter(a => /description\.md$/.test(a))[0];
+    let content = files.filter(a => !/(description|example|notes)\.md$/.test(a));
+    let notes = files.filter(a => /notes\.md$/.test(a))[0];
+    let example = files.filter(a => /example\.md$/.test(a))[0];
 
     let text = [];
 
@@ -50,11 +52,24 @@ module.exports = {
 
         text.push('## Description');
 
-        // Just in case you didn't write this up
-        try {
+        if (description) {
           text.push(fs.readFileSync(description, 'utf8'));
-        } catch (e) {
+        } else {
           text.push('No description provided');
+        }
+
+        if (notes) {
+          text.push('');
+          text.push('## Notes');
+          text.push('');
+          text.push(fs.readFileSync(notes, 'utf8'));
+        }
+
+        if (example) {
+          text.push('');
+          text.push('## Example');
+          text.push('');
+          text.push(fs.readFileSync(example, 'utf8'));
         }
 
         text.push('## Table of Contents (' + content.length + ')');
