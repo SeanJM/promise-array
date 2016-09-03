@@ -14,7 +14,7 @@ try {
   fs.mkdirSync('test/');
     fs.writeFileSync(
       'test/index.js',
-      fs.readFileSync('test/boilerplate.js', 'utf8')
+      fs.readFileSync('tinyTest/boilerplate.js', 'utf8')
     );
 
   // Include an empty README
@@ -73,24 +73,31 @@ try {
   fs.writeFileSync(
     root + 'readme/description.md',
     '<!--' +
-    '  Describe to the world what you toiled over. You magnificent being.' +
-    '  (The title \'Is going to be generated\')' +
-    '-->'
+    '\n  Describe to the world what you toiled over. You magnificent being.' +
+    '\n  (The title \'Is going to be generated\')' +
+    '\n-->'
   );
 
   fs.writeFileSync(
     root + 'readme/notes.md',
-    '<!--' +
-    '  Anything \'notable\' that the user should know' +
-    '-->'
+    '\n<!--' +
+    '\n  Anything \'notable\' that the user should know' +
+    '\n-->'
   );
 
   if (!congig.isSite) {
     fs.writeFileSync(
       root + 'readme/example.md',
-      '<!--' +
-      '  An brief example which showcases your plugin' +
-      '-->'
+      '\n<!--' +
+      '\n  An brief example which showcases your plugin' +
+      '\n-->'
+    );
+
+    fs.writeFileSync(
+      root + 'readme/installation.md',
+      '\n<!--' +
+      '\n  Installation instructions' +
+      '\n-->'
     );
   }
 }
