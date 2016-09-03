@@ -7,6 +7,7 @@
 
 - Passed: 12
 - Failed: 0
+
 ***
 ## Description
 A small library providing asynchronous array methods for promises.
