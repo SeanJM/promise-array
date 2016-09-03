@@ -31,7 +31,7 @@ module.exports = {
 
         text.push('');
 
-        text.push('Tests passed ' + object.passed + ' of ' + object.total + ' (' + Math.round(object.passed / object.total * 100) + '%)');
+        text.push('#### ' + object.passed + ' of ' + object.total + 'tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
 
         text.push('');
         text.push('***');
