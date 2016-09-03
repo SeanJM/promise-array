@@ -31,7 +31,11 @@ module.exports = {
 
         text.push('');
 
-        text.push('#### Tests: ' + object.passed + ' of ' + object.total + ' passed (' + Math.round((object.passed / object.total) * 100) + '%)');
+        if (object.passed === object.total) {
+          text.push('#### ✅ All tests pass');
+        } else {
+          text.push('#### 🚫 ' + object.passed + ' of ' + object.total + ' tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
+        }
 
         text.push('');
         text.push('***');
