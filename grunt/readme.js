@@ -5,6 +5,15 @@ const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
 
+function capitalCase(string) {
+  var spaced = string.trim().replace(/-|_/g, ' ').split(' ');
+  var s = spaced.map(function (a) {
+    return /^[A-Z]/.test(a) ? a : a[0].toUpperCase() + a.substr(1).toLowerCase();
+  }).join(' ');
+
+  return s[0].toUpperCase() + s.slice(1);
+}
+
 module.exports = {
   glob : ['src/readme/**/*.md'],
   task : function () {
@@ -26,7 +35,7 @@ module.exports = {
     test
       .silence()
       .then(function (object) {
-        text.push('# ' + pkg.name.replace(/-|_/g, ' ') + ' ' + pkg.version);
+        text.push('# ' + capitalCase(pkg.name) + ' ' + pkg.version);
         text.push('#### License: ' + pkg.license || 'MIT License');
 
         text.push('');

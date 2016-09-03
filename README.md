@@ -1,4 +1,4 @@
-# PromiseList 0.1.0
+# Promise List 1.0.0
 #### License: MIT
 
 #### ✅ All 12 tests pass
