@@ -1,7 +1,7 @@
 # PromiseList
 #### License: MIT
 
-#### ✅ All tests pass
+#### ✅ All 12 tests pass
 
 ***
 

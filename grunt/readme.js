@@ -32,7 +32,7 @@ module.exports = {
         text.push('');
 
         if (object.passed === object.total) {
-          text.push('#### ✅ All tests pass');
+          text.push('#### ✅ All ' + object.total + ' tests pass');
         } else {
           text.push('#### 🚫 ' + object.passed + ' of ' + object.total + ' tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
         }
