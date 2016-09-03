@@ -4,7 +4,7 @@ const m = require('match-file-utility');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
-
+const HR = '—';
 module.exports = {
   glob : ['src/readme/**/*.md'],
   task : function () {
@@ -26,7 +26,7 @@ module.exports = {
     test
       .silence()
       .then(function (object) {
-        text.push('# ' + pkg.name.replace(/-|_/g, ' ' + pkg.version));
+        text.push('# ' + pkg.name.replace(/-|_/g, ' ') + ' ' + pkg.version);
         text.push('#### License: ' + pkg.license || 'MIT License');
 
         text.push('');
@@ -38,7 +38,7 @@ module.exports = {
         }
 
         text.push('');
-        text.push('***');
+        text.push(HR);
         text.push('');
 
         text.push('## Table of Contents');
