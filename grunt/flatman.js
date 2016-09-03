@@ -13,7 +13,8 @@ module.exports = {
   ],
 
   files : files,
-  task : function () {
+
+  task : function (callback) {
     const pages = m('src/flatman/pages', /\.js$/).map(a => '../' + a);
 
     try {
@@ -41,5 +42,7 @@ module.exports = {
     } catch(e) {
       console.log('flatman error: ' + e);
     }
+    
+    callback();
   }
 };
