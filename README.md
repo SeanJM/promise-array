@@ -1,4 +1,4 @@
-# Promise List 1.0.0
+# Promise Array 1.0.0
 #### License: MIT
 
 #### ✅ All 12 tests pass

@@ -1,0 +1,125 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.10.3
+3 info using node@v6.4.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/sean/Dropbox/projects/promiseList',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/sean/.npm/promise-list/1.0.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/sean/.npm correctMkdir not in flight; initializing
+10 info lifecycle promise-list@1.0.0~prepublish: promise-list@1.0.0
+11 silly lifecycle promise-list@1.0.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/sean/.npm/promise-list/1.0.0/package.tgz',
+12 verbose tar pack   '/Users/sean/Dropbox/projects/promiseList' ]
+13 verbose tarball /Users/sean/.npm/promise-list/1.0.0/package.tgz
+14 verbose folder /Users/sean/Dropbox/projects/promiseList
+15 verbose addLocalTarball adding from inside cache /Users/sean/.npm/promise-list/1.0.0/package.tgz
+16 verbose correctMkdir /Users/sean/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd promise-list@1.0.0
+18 verbose afterAdd /Users/sean/.npm/promise-list/1.0.0/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/sean/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/sean/.npm/promise-list/1.0.0/package/package.json written
+21 silly publish { name: 'promise-list',
+21 silly publish   version: '1.0.0',
+21 silly publish   license: 'MIT',
+21 silly publish   gruntBuild:
+21 silly publish    { isBundle: true,
+21 silly publish      isProduction: false,
+21 silly publish      sourceMap: true,
+21 silly publish      isSite: false,
+21 silly publish      useClosure: true,
+21 silly publish      bundle: 'PromiseList' },
+21 silly publish   scripts: { test: 'test/index.js' },
+21 silly publish   dependencies:
+21 silly publish    { colors: '^1.1.2',
+21 silly publish      dotenv: '^2.0.0',
+21 silly publish      grunt: '^0.4.5',
+21 silly publish      'grunt-autoprefixer': '^1.0.1',
+21 silly publish      'grunt-cli': '^0.1.13',
+21 silly publish      'grunt-concat-sourcemap': '^0.4.3',
+21 silly publish      'grunt-contrib-concat': '^1.0.1',
+21 silly publish      'grunt-contrib-copy': '^0.8.2',
+21 silly publish      'grunt-contrib-cssmin': '^0.10.0',
+21 silly publish      'grunt-contrib-imagemin': '^0.7.2',
+21 silly publish      'grunt-contrib-sass': '^1.0.0',
+21 silly publish      'grunt-contrib-uglify': '^0.5.1',
+21 silly publish      'grunt-contrib-watch': '^0.6.1',
+21 silly publish      'imagemin-gifsicle': '^5.1.0',
+21 silly publish      'imagemin-optipng': '^5.2.0',
+21 silly publish      'imagemin-pngquant': '^5.0.0',
+21 silly publish      lodash: '^3.10.1',
+21 silly publish      'match-file-utility': '^3.4.0' },
+21 silly publish   readme: '# Promise List 1.0.0\n#### License: MIT\n\n#### ✅ All 12 tests pass\n\n## Table of Contents\n\n#### Overview\n\n- [Description](#description)\n- [Notes](#notes)\n- [Example](#example)\n\n#### Content\n\n- [filter](#filter--top)\n- [forEach](#foreach--top)\n- [map](#map--top)\n\n## Description\n\nA small library providing asynchronous array methods for promises.\n\n\n## Notes\n\nThis differs from `Promise.all` in that it does not wait for all the promises to resolve. As each promise resolves, it executes each method on that value.\n\nFor example, you want to update a list of values and you don\'t want the interface to appear frozen.\n\n\n## Example\n\n```javascript\nvar statusLine = document.querySelector(\'#status-line\');\n\nPromiseList(listOfPromises)\n  .map(a => a * 2)\n  .filter(a => a < 100)\n  .forEach(\n    function (value) {\n      var el = document.createElement(\'div\');\n      el.innerHtml = value;\n      document.body.append(el);\n    }\n  )\n  .then(\n    function () {\n      statusLine.innerHtml = \'Complete\';\n    }\n  )\n  .catch(\n    function () {\n      statusLine.innerHtml = \'Incomplete, please try again.\';\n    }\n  )\n```\n\n\n### filter ... ([top](#table-of-contents))\n\nWorks the same as the default `.filter` function.\n\n```javascript\nvar myPromises = [promise1, promise2];\nPromiseList(myPromises)\n  .filter(function (value, index) {\n    return value > 100;\n  });\n```\n\n### forEach ... ([top](#table-of-contents))\n\nWorks the same as the default `.forEach` function.\n\n```javascript\nvar myPromises = [promise1, promise2];\nPromiseList(myPromises)\n  .forEach(function (value, index) {\n    // My code\n  });\n```\n\n### map ... ([top](#table-of-contents))\n\nWorks the same as the default `.map` function.\n\n```javascript\nvar myPromises = [promise1, promise2];\nPromiseList(myPromises)\n  .map(function (value, index) {\n    return value.toLowerCase();\n  });\n```\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '8d81cad627afe4c356c0b054ee92d4156f1f4270',
+21 silly publish   description: '#### ✅ All 12 tests pass',
+21 silly publish   _id: 'promise-list@1.0.0',
+21 silly publish   _shasum: 'de487a64e44b205bd4a695001e678200cd916f0a',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name promise-list
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'promise-list',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'promise-list',
+26 silly mapToRegistry   name: 'promise-list',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/promise-list
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/sean/.npm/promise-list/1.0.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/promise-list
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 1:00:31 AM
+33 verbose request using bearer token for auth
+34 verbose request id d3ce5e4d59351592
+35 http request PUT https://registry.npmjs.org/promise-list
+36 http 403 https://registry.npmjs.org/promise-list
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '106',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Sat, 03 Sep 2016 05:00:32 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-jfk8133-JFK',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1472878831.609418,VS0,VE613',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/sean/.npm/registry.npmjs.org/promise-list on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: you do not have permission to publish "promise-list". Are you logged in as the correct user? : promise-list
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid promise-list
+43 verbose cwd /Users/sean/Dropbox/projects/promiseList
+44 error Darwin 15.6.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v6.4.0
+47 error npm  v3.10.3
+48 error code E403
+49 error you do not have permission to publish "promise-list". Are you logged in as the correct user? : promise-list
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]

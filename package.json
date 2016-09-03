@@ -1,11 +1,11 @@
 {
-  "name": "promise-list",
+  "name": "promise-array",
   "version": "1.0.0",
   "license": "MIT",
 
   "gruntBuild": {
     "isBundle": true,
-    "isProduction": false,
+    "isProduction": true,
     "sourceMap": true,
     "isSite": false,
     "useClosure": true,
