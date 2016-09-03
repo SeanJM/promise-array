@@ -1,4 +1,4 @@
-# Promise Array 1.0.0
+# Promise Array 1.0.1
 #### License: MIT
 
 #### ✅ All 12 tests pass
@@ -27,7 +27,11 @@ A small library providing asynchronous array methods for promises.
 
 ### Browser
 Just download the `PromiseList.min.js` and include it in an HTML `<script>` tag
-eg: `<script src="PromiseList.min.js"></script>`
+
+eg:
+```html
+<script src="PromiseList.min.js"></script>
+```
 
 ### Node
 ```bash
