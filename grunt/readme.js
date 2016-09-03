@@ -24,10 +24,13 @@ module.exports = {
     test
       .silence()
       .then(function (object) {
-        text.push('# ' + pkg.name.replace(/-|_/g, ' '));
-        text.push('### Version: ' + pkg.version);
-        text.push('### License: ' + pkg.license || 'MIT License');
+        text.push('# ' + pkg.name.replace(/-|_/g, ' ' + pkg.version));
+        text.push('#### License: ' + pkg.license || 'MIT License');
+
+        text.push('');
         text.push('***');
+        text.push('');
+
         text.push('### Tests');
 
         text.push(
@@ -40,9 +43,10 @@ module.exports = {
         text.push('');
         text.push('- Passed: ' + object.passed);
         text.push('- Failed: ' + object.failed);
-        text.push('');
 
+        text.push('');
         text.push('***');
+        text.push('');
 
         text.push('## Description');
 
@@ -60,12 +64,15 @@ module.exports = {
           text.push('- [' + name + '](#' + _.kebabCase(name) + '-top)');
         });
 
+        text.push('');
         text.push('***');
+        text.push('');
 
         content.forEach(function (a) {
           var string = fs.readFileSync(a, 'utf8');
           var name = path.basename(a).replace(/\.md$/, '');
-          text.push('## ' + name + ' \([top](#table-of-contents)\)');
+          text.push('### ' + name + ' ... \([top](#table-of-contents)\)');
+          text.push('');
           text.push(string);
         });
 

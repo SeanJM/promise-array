@@ -1,7 +1,8 @@
 # PromiseList
-### Version: 0.1.0
-### License: MIT
+#### License: MIT
+
 ***
+
 ### Tests
 <span style="display: inline-block; width: 100px; position: relative; height: 30px; background: rgb(220, 225, 236)"><span style="width: 1%; background: rgb(0, 195, 100); height : 100%;"></span><span style="width: 0%; background: rgb(195, 0, 100); height : 100%;"></span></span>
 
@@ -9,6 +10,7 @@
 - Failed: 0
 
 ***
+
 ## Description
 A small library providing asynchronous array methods for promises.
 
@@ -48,8 +50,11 @@ PromiseList(listOfPromises)
 - [filter](#filter-top)
 - [forEach](#for-each-top)
 - [map](#map-top)
+
 ***
-## filter ([top](#table-of-contents))
+
+### filter ... ([top](#table-of-contents))
+
 Works the same as the default `.filter` function.
 
 ```javascript
@@ -60,7 +65,8 @@ PromiseList(myPromises)
   });
 ```
 
-## forEach ([top](#table-of-contents))
+### forEach ... ([top](#table-of-contents))
+
 Works the same as the default `.forEach` function.
 
 ```javascript
@@ -71,7 +77,8 @@ PromiseList(myPromises)
   });
 ```
 
-## map ([top](#table-of-contents))
+### map ... ([top](#table-of-contents))
+
 Works the same as the default `.map` function.
 
 ```javascript
