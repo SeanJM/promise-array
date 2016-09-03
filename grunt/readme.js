@@ -4,7 +4,7 @@ const m = require('match-file-utility');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
-const HR = '——————';
+const HR = '——————————————————';
 module.exports = {
   glob : ['src/readme/**/*.md'],
   task : function () {
