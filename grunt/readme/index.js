@@ -50,16 +50,21 @@ function task(callback) {
   test.silence();
 
   test.then(function (test_results) {
+    var hasTests = test_results.int_passed && test_results.int_failed;
     text.push('# ' + capitalCase(pkg.name) + ' ' + pkg.version);
 
     text.push('#### License: ' + linkLicense(pkg.license || 'MIT'));
 
     text.push('');
 
-    if (test_results.int_passed === test_results.int_total) {
-      text.push('#### ✅ All ' + test_results.int_total + ' tests pass');
+    if (hasTests) {
+      if (test_results.int_passed === test_results.int_total) {
+        text.push('#### ✅ All ' + test_results.int_total + ' tests pass');
+      } else {
+        text.push('#### 🚫 ' + test_results.int_passed + ' of ' + test_results.int_total + ' tests passed (' + Math.round((test_results.int_passed / test_results.int_total) * 100) + '%)');
+      }
     } else {
-      text.push('#### 🚫 ' + test_results.int_passed + ' of ' + test_results.int_total + ' tests passed (' + Math.round((test_results.int_passed / test_results.int_total) * 100) + '%)');
+      text.push('#### 🐛 No unit tests');
     }
 
     text.push('', '## Table of Contents');
@@ -78,6 +83,10 @@ function task(callback) {
 
     if (hasExample) {
       text.push('- [Example](#example)');
+    }
+
+    if (hasTests) {
+      text.push('- [Tests](#tests)');
     }
 
     if (content.length) {
@@ -122,25 +131,27 @@ function task(callback) {
       text.push(string);
     });
 
-    text.push('', '## Tests');
+    if (hasTests) {
+      text.push('***', '', '## Tests');
 
-    text.push('', '```');
+      text.push('', '```');
 
-    for (var k in test_results.passed) {
-      text.push(
-        padLeft(test_results.passed[k].index, 5, ' ') + '. ' + padRight(test_results.passed[k].name, 68, '.') + ' ✅'
-      );
+      for (var k in test_results.passed) {
+        text.push(
+          padLeft(test_results.passed[k].index, 5, ' ') + '. ' + padRight(test_results.passed[k].name, 68, '.') + ' ✅'
+        );
+      }
+
+      for (k in test_results.failed) {
+        text.push(
+          '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.') + ' 🚫' +
+          '\n +' + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ') +
+          '\n -' + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ')
+        );
+      }
+
+      text.push('```', '');
     }
-
-    for (k in test_results.failed) {
-      text.push(
-        '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.') + ' 🚫' +
-        '\n +' + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ') +
-        '\n -' + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ')
-      );
-    }
-
-    text.push('```', '');
 
     fs.writeFileSync('README.md', text.join('\n'));
 
