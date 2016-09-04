@@ -50,7 +50,8 @@ function task(callback) {
   test.silence();
 
   test.then(function (test_results) {
-    var hasTests = test_results.int_passed && test_results.int_failed;
+    var hasTests = test_results.int_total > 0;
+
     text.push('# ' + capitalCase(pkg.name) + ' ' + pkg.version);
 
     text.push('#### License: ' + linkLicense(pkg.license || 'MIT'));

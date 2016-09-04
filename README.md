@@ -11,6 +11,7 @@
 - [Installation](#installation)
 - [Notes](#notes)
 - [Example](#example)
+- [Tests](#tests)
 
 #### Content
 
@@ -110,6 +111,7 @@ PromiseList(myPromises)
   });
 ```
 
+***
 
 ## Tests
 
