@@ -5,7 +5,6 @@ const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
 const linkLicense = require('./linkLicense');
-const colors = require('colors');
 
 const padLeft = require('../lib/padLeft');
 const padRight = require('../lib/padRight');
@@ -123,21 +122,21 @@ function task(callback) {
       text.push(string);
     });
 
-    text.push('', '## Test');
+    text.push('', '## Tests');
 
     text.push('', '```bash');
 
     for (var k in test_results.passed) {
       text.push(
-        padLeft(test_results.passed[k].index, 5, ' ') + '. ' + padRight(test_results.passed[k].name, 68, '.') + 'PASSED'.green
+        padLeft(test_results.passed[k].index, 5, ' ') + '. ' + padRight(test_results.passed[k].name, 68, '.') + ' ✅'
       );
     }
 
     for (k in test_results.failed) {
       text.push(
-        '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.').red + ' FAILED'.red +
-        '\n +'.green + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ').grey +
-        '\n -'.red + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ').grey
+        '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.') + ' 🚫' +
+        '\n +' + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ') +
+        '\n -' + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ')
       );
     }
 
