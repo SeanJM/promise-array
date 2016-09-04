@@ -5,6 +5,10 @@ const pkg = JSON.parse(fs.readFileSync('package.json'));
 const config = pkg.gruntBuild;
 const _ = require('lodash');
 const linkLicense = require('./linkLicense');
+const colors = require('colors');
+
+const padLeft = require('../lib/padLeft');
+const padRight = require('../lib/padRight');
 
 function capitalCase(string) {
   let spaced = string.trim().replace(/-|_/g, ' ').split(' ');
@@ -46,26 +50,22 @@ function task(callback) {
 
   test.silence();
 
-  test.then(function (object) {
+  test.then(function (test_results) {
     text.push('# ' + capitalCase(pkg.name) + ' ' + pkg.version);
 
     text.push('#### License: ' + linkLicense(pkg.license || 'MIT'));
 
     text.push('');
 
-    if (object.passed === object.total) {
-      text.push('#### ✅ All ' + object.total + ' tests pass');
+    if (test_results.int_passed === test_results.int_total) {
+      text.push('#### ✅ All ' + test_results.int_total + ' tests pass');
     } else {
-      text.push('#### 🚫 ' + object.passed + ' of ' + object.total + ' tests passed (' + Math.round((object.passed / object.total) * 100) + '%)');
+      text.push('#### 🚫 ' + test_results.int_passed + ' of ' + test_results.int_total + ' tests passed (' + Math.round((test_results.int_passed / test_results.int_total) * 100) + '%)');
     }
 
-    text.push('');
+    text.push('', '## Table of Contents');
 
-    text.push('## Table of Contents');
-
-    text.push('');
-    text.push('#### Overview');
-    text.push('');
+    text.push('', '#### Overview', '');
 
     text.push('- [Description](#description)');
 
@@ -82,9 +82,7 @@ function task(callback) {
     }
 
     if (content.length) {
-      text.push('');
-      text.push('#### Content');
-      text.push('');
+      text.push('', '#### Content', '');
     }
 
     content.forEach(function (a) {
@@ -106,16 +104,12 @@ function task(callback) {
     }
 
     if (hasNotes) {
-      text.push('');
-      text.push('## Notes');
-      text.push('');
+      text.push('', '## Notes', '');
       text.push(fs.readFileSync(notes, 'utf8'));
     }
 
     if (hasExample) {
-      text.push('');
-      text.push('## Example');
-      text.push('');
+      text.push('', '## Example', '');
       text.push(fs.readFileSync(example, 'utf8'));
     }
 
@@ -128,6 +122,26 @@ function task(callback) {
       text.push('');
       text.push(string);
     });
+
+    text.push('', '## Test');
+
+    text.push('', '```bash');
+
+    for (var k in test_results.passed) {
+      text.push(
+        padLeft(test_results.passed[k].index, 5, ' ') + '. ' + padRight(test_results.passed[k].name, 68, '.') + 'PASSED'.green
+      );
+    }
+
+    for (k in test_results.failed) {
+      text.push(
+        '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.').red + ' FAILED'.red +
+        '\n +'.green + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ').grey +
+        '\n -'.red + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ').grey
+      );
+    }
+
+    text.push('```', '');
 
     fs.writeFileSync('README.md', text.join('\n'));
 

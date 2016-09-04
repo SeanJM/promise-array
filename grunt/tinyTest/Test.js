@@ -2,26 +2,6 @@ const isTypeEqual = require('./predicates/isTypeEqual');
 const typeToString = require('./utilities/typeToString');
 const maybePromise = require('../lib/maybePromise');
 
-function padRight(a, n, c) {
-  a = typeof a === 'string'
-    ? a
-    : a.toString();
-
-  return a.length > n
-    ? a
-    : a + new Array(n - a.length).join(c);
-}
-
-function padLeft(a, n, c) {
-  a = typeof a === 'string'
-    ? a
-    : a.toString();
-
-  return a.length > n
-    ? a
-    : new Array(n - a.length).join(c) + a;
-}
-
 function Test(opt) {
   this.name = opt.name;
 
@@ -37,15 +17,23 @@ function Test(opt) {
 
 Test.prototype.pass = function () {
   this.passed[this.index] = (
-    padLeft(this.index + '. ', 6, ' ') + padRight(this.name + ' ', 66, '.'.grey) + ' PASSED'.green
+    {
+      index : this.index,
+      name : this.name,
+      a : this.a,
+      b : this.b
+    }
   );
 };
 
 Test.prototype.fail = function () {
   this.failed[this.index] = (
-    '\n' + padLeft(this.index + '. ', 6, ' ') + padRight(this.name + ' ', 66, '.').red + ' FAILED'.red +
-    '\n +'.green + ' Expected: ' + padLeft(typeToString(this.b), 66, ' ').grey +
-    '\n -'.red + '   Actual: ' + padLeft(typeToString(this.a), 66, ' ').grey
+    {
+      index : this.index,
+      name : this.name,
+      a : this.a,
+      b : this.b
+    }
   );
 };
 

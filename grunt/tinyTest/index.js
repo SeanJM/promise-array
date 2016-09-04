@@ -1,6 +1,9 @@
 const Test = require('./Test');
 const colors = require('colors');
 
+const padLeft = require('../lib/padLeft');
+const padRight = require('../lib/padRight');
+
 function TinyTest(callback) {
   var self = this;
   var index = 1;
@@ -79,12 +82,18 @@ TinyTest.prototype.complete = function () {
     self.int_passed = 0;
 
     for (var k in self.passed) {
-      self.log(self.passed[k]);
+      self.log(
+        padLeft(self.passed[k].index + '. ', 6, ' ') + padRight(self.passed[k].name + ' ', 66, '.'.grey) + ' PASSED'.green
+      );
       self.int_passed += 1;
     }
 
     for (k in self.failed) {
-      self.log(self.failed[k]);
+      self.log(
+        '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.').red + ' FAILED'.red +
+        '\n +'.green + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ').grey +
+        '\n -'.red + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ').grey
+      );
       self.int_failed += 1;
     }
 
@@ -117,9 +126,11 @@ TinyTest.prototype.catch = function (callback) {
 
 TinyTest.prototype.resolve = function () {
   var opt = {
-    failed : this.int_failed,
-    passed : this.int_passed,
-    total : this.int_failed + this.int_passed
+    int_failed : this.int_failed,
+    int_passed : this.int_passed,
+    int_total : this.int_failed + this.int_passed,
+    passed : this.passed,
+    failed : this.failed
   };
 
   this.method.resolve.forEach(
