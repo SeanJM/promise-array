@@ -113,7 +113,7 @@ PromiseList(myPromises)
 
 ## Tests
 
-```bash
+```
    1. Promise.List: map (undefined)...................................... ✅
    2. Promise.List: map (NaN)............................................ ✅
    3. Promise.List: forEach (should be).................................. ✅

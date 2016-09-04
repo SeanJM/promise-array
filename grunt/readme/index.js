@@ -124,7 +124,7 @@ function task(callback) {
 
     text.push('', '## Tests');
 
-    text.push('', '```bash');
+    text.push('', '```');
 
     for (var k in test_results.passed) {
       text.push(
