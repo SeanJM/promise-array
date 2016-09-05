@@ -25,7 +25,7 @@ function chain(self, value, index) {
               } else {
                 each(i + 1, result);
               }
-            });
+            }).catch(reject);
         } else {
           resolve(value);
         }

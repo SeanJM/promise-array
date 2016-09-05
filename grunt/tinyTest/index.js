@@ -162,7 +162,7 @@ TinyTest.prototype.logError = function (value) {
 
     if (value.isCaught[0]) {
       this.log(
-        '    Right: '.red + value.a.toString().red
+        '     Right: '.red + value.a.toString().red
       );
     }
     if (value.isCaught[1]) {

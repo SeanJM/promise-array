@@ -77,13 +77,20 @@ PromiseList(listOfPromises)
 
 ### filter ... ([top](#table-of-contents))
 
-Works the same as the default `.filter` function.
+Works the same as the default `.filter` function with the exception that you can return a `Promise` as well.
 
 ```javascript
 var myPromises = [promise1, promise2];
 PromiseList(myPromises)
   .filter(function (value, index) {
     return value > 100;
+  });
+```
+
+```javascript
+PromiseList(myPromises)
+  .map(function (value) {
+    return new Promise(...)
   });
 ```
 
@@ -101,13 +108,20 @@ PromiseList(myPromises)
 
 ### map ... ([top](#table-of-contents))
 
-Works the same as the default `.map` function.
+Works the same as the default `.map` function, with the exception that it can also return a `Promise`
 
 ```javascript
 var myPromises = [promise1, promise2];
 PromiseList(myPromises)
   .map(function (value, index) {
     return value.toLowerCase();
+  });
+```
+
+```javascript
+PromiseList(myPromises)
+  .map(function (value) {
+    return new Promise(...)
   });
 ```
 

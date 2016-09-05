@@ -146,18 +146,18 @@ function task(callback) {
 
       for (k in test_results.failed) {
         text.push(
-          '\n' + padLeft(test_results.failed[k].index + '. ', 6, ' ') + padRight(test_results.failed[k].name + ' ', 66, '.') + ' 🚫'
+          '\n' + padLeft(test_results.failed[k].index, 5, ' ') + '. ' + padRight(test_results.failed[k].name + ' ', 68, '.') + ' 🚫'
         );
 
         if (test_results.failed[k].isCaught[0] || test_results.failed[k].isCaught[1]) {
           if (test_results.failed[k].isCaught[0]) {
             text.push(
-              '     ' + test_results.failed[k].a.toString()
+              '      ' + test_results.failed[k].a.toString()
             );
           }
           if (test_results.failed[k].isCaught[1]) {
             text.push(
-              '     ' + test_results.failed[k].b.toString()
+              '      ' + test_results.failed[k].b.toString()
             );
           }
         } else {
