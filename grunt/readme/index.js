@@ -132,6 +132,7 @@ function task(callback) {
       text.push(string);
     });
 
+
     if (hasTests) {
       text.push('***', '', '## Tests');
 
@@ -145,10 +146,26 @@ function task(callback) {
 
       for (k in test_results.failed) {
         text.push(
-          '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.') + ' 🚫' +
-          '\n +' + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ') +
-          '\n -' + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ')
+          '\n' + padLeft(test_results.failed[k].index + '. ', 6, ' ') + padRight(test_results.failed[k].name + ' ', 66, '.') + ' 🚫'
         );
+
+        if (test_results.failed[k].isCaught[0] || test_results.failed[k].isCaught[1]) {
+          if (test_results.failed[k].isCaught[0]) {
+            text.push(
+              '     ' + test_results.failed[k].a.toString()
+            );
+          }
+          if (test_results.failed[k].isCaught[1]) {
+            text.push(
+              '     ' + test_results.failed[k].b.toString()
+            );
+          }
+        } else {
+          text.push(
+            '\n +' + '   Left: ' + padLeft(typeToString(test_results.failed[k].b), 66, ' ') +
+            '\n -' + '  Right: ' + padLeft(typeToString(test_results.failed[k].a), 66, ' ')
+          );
+        }
       }
 
       text.push('```', '');

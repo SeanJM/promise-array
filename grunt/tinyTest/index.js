@@ -3,13 +3,14 @@ const colors = require('colors');
 
 const padLeft = require('../lib/padLeft');
 const padRight = require('../lib/padRight');
+const typeToString = require('./utilities/typeToString');
 
 function TinyTest(callback) {
   var self = this;
   var index = 1;
 
   function test(name) {
-    var test_instance = new Test(
+    var promise_test = new Test(
       {
         name : name,
         passed : self.passed,
@@ -18,13 +19,13 @@ function TinyTest(callback) {
       }
     );
 
-    self.list_tests.push(test_instance);
+    self.list_tests.push(promise_test);
 
-    return test_instance;
+    return promise_test;
   }
 
-  this.passed = [];
-  this.failed = [];
+  this.passed = {};
+  this.failed = {};
 
   this.isSilent = false;
 
@@ -41,11 +42,7 @@ function TinyTest(callback) {
 
     self.log('\n Loading tests (' + self.list_tests.length.toString().cyan + ')\n');
 
-    Promise.all(self.list_tests)
-      .then(self.complete())
-      .catch(function (error) {
-        self.reject(error);
-      });
+    Promise.all(self.list_tests).then(a => self.complete());
   }, 20);
 }
 
@@ -53,59 +50,53 @@ TinyTest.prototype.printFail = function () {
   let total = (this.int_passed + this.int_failed);
   let perc = Math.round((this.int_failed / total) * 100).toString() + '%';
   this.log(
-    '\n -'.red + ' Failed: ' + this.int_failed + '/' + total + ' (' + perc.cyan + ')'
+    '\n     -'.red + ' Failed: ' + this.int_failed + '/' + total + ' (' + perc.cyan + ')'
   );
 };
 
 TinyTest.prototype.printPass = function () {
   this.log(
     this.int_passed > 1
-      ? '\n +'.green + ' All ' + this.int_passed + ' tests passed'
-      : '\n + '.green + this.int_passed + ' test passed'
+      ? '\n     +'.green + ' All ' + this.int_passed + ' tests passed'
+      : '\n     + '.green + this.int_passed + ' test passed'
   );
 };
 
 TinyTest.prototype.printLength = function () {
   var time = (this.date_complete - this.date_start) / 1000;
   this.log(
-    '   Completed in ' + time.toString().cyan + 's'.cyan + '\n'
+    '       Completed in ' + time.toString().cyan + 's'.cyan + '\n'
   );
 };
 
 TinyTest.prototype.complete = function () {
-  var self = this;
+  this.date_complete = new Date();
 
-  return function () {
-    self.date_complete = new Date();
+  this.int_failed = 0;
+  this.int_passed = 0;
 
-    self.int_failed = 0;
-    self.int_passed = 0;
 
-    for (var k in self.passed) {
-      self.log(
-        padLeft(self.passed[k].index + '. ', 6, ' ') + padRight(self.passed[k].name + ' ', 66, '.'.grey) + ' PASSED'.green
-      );
-      self.int_passed += 1;
-    }
+  for (var k in this.passed) {
+    this.log(
+      padLeft(this.passed[k].index + '. ', 6, ' ') + padRight(this.passed[k].name + ' ', 66, '.'.grey) + ' PASSED'.green
+    );
+    this.int_passed += 1;
+  }
 
-    for (k in self.failed) {
-      self.log(
-        '\n' + padLeft(self.failed[k].index + '. ', 6, ' ') + padRight(self.failed[k].name + ' ', 66, '.').red + ' FAILED'.red +
-        '\n +'.green + ' Expected: ' + padLeft(typeToString(self.failed[k].b), 66, ' ').grey +
-        '\n -'.red + '   Actual: ' + padLeft(typeToString(self.failed[k].a), 66, ' ').grey
-      );
-      self.int_failed += 1;
-    }
 
-    if (Object.keys(self.failed).length) {
-      self.printFail();
-    } else {
-      self.printPass();
-    }
+  for (k in this.failed) {
+    this.logError(this.failed[k]);
+    this.int_failed += 1;
+  }
 
-    self.printLength();
-    self.resolve();
-  };
+  if (Object.keys(this.failed).length) {
+    this.printFail();
+  } else {
+    this.printPass();
+  }
+
+  this.printLength();
+  this.resolve();
 };
 
 TinyTest.prototype.then = function (callback) {
@@ -161,6 +152,31 @@ TinyTest.prototype.reject = function (error) {
 TinyTest.prototype.silence = function () {
   this.isSilent = true;
   return this;
+};
+
+TinyTest.prototype.logError = function (value) {
+  if (value.isCaught[0] || value.isCaught[1]) {
+    this.log(
+      '\n' + padLeft(value.index + '. ', 6, ' ') + padRight(value.name + ' ', 66, '.').red + ' FAILED'.red
+    );
+
+    if (value.isCaught[0]) {
+      this.log(
+        '     Left: '.red + value.a.toString().red
+      );
+    }
+    if (value.isCaught[1]) {
+      this.log(
+        '    Right: '.red + value.a.toString().red
+      );
+    }
+  } else {
+    this.log(
+      '\n' + padLeft(value.index + '. ', 6, ' ') + padRight(value.name + ' ', 66, '.').red + ' FAILED'.red +
+      '\n +'.green + ' Left: ' + padLeft(typeToString(value.b), 66, ' ').grey +
+      '\n -'.red + '  Right: ' + padLeft(typeToString(value.a), 66, ' ').grey
+    );
+  }
 };
 
 TinyTest.prototype.log = function (value) {

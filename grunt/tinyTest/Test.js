@@ -29,6 +29,7 @@ Test.prototype.pass = function () {
 Test.prototype.fail = function () {
   this.failed[this.index] = (
     {
+      isCaught : this.isCaught,
       index : this.index,
       name : this.name,
       a : this.a,
@@ -45,10 +46,12 @@ Test.prototype.this = function (value) {
 Test.prototype.runTest = function() {
   var self = this;
 
+  this.isCaught = [ false, false ];
+
   function maybeB(b_value) {
     self.b = b_value;
 
-    if (isTypeEqual(self.a, self.b) === self.equality) {
+    if (!self.isCaught[0] && !self.isCaught[1] && isTypeEqual(self.a, self.b) === self.equality) {
       self.pass();
     } else {
       self.fail();
@@ -60,13 +63,21 @@ Test.prototype.runTest = function() {
   function maybeA(a_value) {
     self.a = a_value;
     maybePromise(self.b)
-      .then(maybeB)
-      .catch(maybeB);
+      .then(function (b_value) {
+        maybeB(b_value);
+      })
+      .catch(function (b_value) {
+        self.isCaught[1] = true;
+        maybeB(b_value);
+      });
   }
 
   maybePromise(this.a)
     .then(maybeA)
-    .catch(maybeA);
+    .catch(function (a_value) {
+      self.isCaught[0] = true;
+      maybeA(a_value);
+    });
 };
 
 Test.prototype.shouldBe = function (value) {
@@ -83,6 +94,13 @@ Test.prototype.shouldNotBe = function (value) {
 
 Test.prototype.then = function (callback) {
   this.method.resolve.push(
+    callback
+  );
+  return this;
+};
+
+Test.prototype.catch = function (callback) {
+  this.method.reject.push(
     callback
   );
   return this;

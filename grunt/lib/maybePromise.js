@@ -1,6 +1,8 @@
 const isPromise = require('./isPromise');
 
 function maybePromise(promise_or_value, resolver) {
+  var t = new Date().getTime();
+
   return new Promise(
 
     function (resolve, reject) {
