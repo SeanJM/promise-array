@@ -1,7 +1,7 @@
 # Promise Array 1.0.3
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 10 tests pass
+#### ✅ All 11 tests pass
 
 ## Table of Contents
 
@@ -126,4 +126,5 @@ PromiseList(myPromises)
    8. Promise.List: map & filter (not be)................................ ✅
    9. Promise.List: map, filter & forEach (should be).................... ✅
   10. Promise.List: map, filter & forEach (should not be undefined)...... ✅
+  11. Promise.List: map to promise....................................... ✅
 ```
