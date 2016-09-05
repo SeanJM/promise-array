@@ -1,4 +1,4 @@
-Works the same as the default `.filter` function with the exception that you can return a `Promise` as well.
+Works the same as the default `.filter` function, with the exception that it can also return a `Promise`
 
 ```javascript
 var myPromises = [promise1, promise2];
