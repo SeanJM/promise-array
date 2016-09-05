@@ -23,6 +23,7 @@ function timedPromise(n) {
   };
 }
 
+
 module.exports = new TinyTest(function (test) {
   if (config.isProduction) {
     Promise.List = require('../bin/PromiseList.min');
@@ -134,38 +135,6 @@ module.exports = new TinyTest(function (test) {
       })
     ).shouldNotBe(
       [ 100, 200 ]
-    );
-
-  test('Promise.List: map & filter (rejected promise)')
-    .this(
-      new Promise.List([
-        timedPromise(100).resolve(),
-        timedPromise(200).reject('Error')
-      ])
-      .map(function (value, index) {
-        return Math.pow(value, index + 1);
-      })
-      .filter(function (value, index) {
-        return value > 100;
-      })
-    ).shouldBe(
-      "Error"
-    );
-
-  test('Promise.List: map & filter (rejected promise -- not be)')
-    .this(
-      new Promise.List([
-        timedPromise(100).resolve(),
-        timedPromise(200).reject('Error')
-      ])
-      .map(function (value, index) {
-        return Math.pow(value, index + 1);
-      })
-      .filter(function (value, index) {
-        return value > 100;
-      })
-    ).shouldNotBe(
-      [100, 200]
     );
 
   test('Promise.List: map, filter & forEach (should be)')
