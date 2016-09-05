@@ -162,19 +162,19 @@ TinyTest.prototype.logError = function (value) {
 
     if (value.isCaught[0]) {
       this.log(
-        '     Left: '.red + value.a.toString().red
+        '    Right: '.red + value.a.toString().red
       );
     }
     if (value.isCaught[1]) {
       this.log(
-        '    Right: '.red + value.a.toString().red
+        '    Left: '.red + value.a.toString().red
       );
     }
   } else {
     this.log(
       '\n' + padLeft(value.index + '. ', 6, ' ') + padRight(value.name + ' ', 66, '.').red + ' FAILED'.red +
-      '\n +'.green + ' Left: ' + padLeft(typeToString(value.b), 66, ' ').grey +
-      '\n -'.red + '  Right: ' + padLeft(typeToString(value.a), 66, ' ').grey
+      '\n     +'.green + ' Right: ' + padLeft(typeToString(value.b), 67, ' ').grey +
+      '\n     -'.red + '  Left: ' + padLeft(typeToString(value.a), 67, ' ').grey
     );
   }
 };

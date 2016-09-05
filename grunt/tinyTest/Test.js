@@ -51,7 +51,11 @@ Test.prototype.runTest = function() {
   function maybeB(b_value) {
     self.b = b_value;
 
-    if (!self.isCaught[0] && !self.isCaught[1] && isTypeEqual(self.a, self.b) === self.equality) {
+
+    if (
+      !self.isCaught[0] && !self.isCaught[1]
+      && isTypeEqual(self.a, self.b) === self.equality
+    ) {
       self.pass();
     } else {
       self.fail();

@@ -175,4 +175,21 @@ module.exports = new TinyTest(function (test) {
       [undefined, undefined]
     );
 
+  test('Promise.List: map to promise')
+    .this(
+      new Promise.List([
+        timedPromise(100).resolve(),
+        timedPromise(200).resolve()
+      ])
+      .map(function (value, index) {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve(value * 2);
+          }, 100);
+        });
+      })
+    ).shouldBe(
+      [200, 400]
+    );
+
 });
