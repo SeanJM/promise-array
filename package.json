@@ -10,10 +10,10 @@
     "sourceMap": true,
     "isSite": false,
     "useClosure": true,
-    "bundle": "PromiseList"
+    "bundle": "PromiseArray"
   },
 
-  "main": "bin/PromiseList.min.js",
+  "main": "bin/PromiseArray.min.js",
 
   "scripts" : {
     "test" : "test/index.js"

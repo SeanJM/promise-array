@@ -1,7 +1,7 @@
 ```javascript
 var statusLine = document.querySelector('#status-line');
 
-PromiseList(listOfPromises)
+PromiseArray(listOfPromises)
   .map(a => a * 2)
   .filter(a => a < 100)
   .forEach(

@@ -27,11 +27,11 @@ A small library providing asynchronous array methods for promises.
 ## Installation
 
 ### Browser
-Just download the `PromiseList.min.js` and include it in an HTML `<script>` tag
+Just download the `PromiseArray.min.js` and include it in an HTML `<script>` tag
 
 eg:
 ```html
-<script src="PromiseList.min.js"></script>
+<script src="PromiseArray.min.js"></script>
 ```
 
 ### Node
@@ -52,7 +52,7 @@ For example, you want to update a list of values and you don't want the interfac
 ```javascript
 var statusLine = document.querySelector('#status-line');
 
-PromiseList(listOfPromises)
+PromiseArray(listOfPromises)
   .map(a => a * 2)
   .filter(a => a < 100)
   .forEach(
@@ -81,14 +81,14 @@ Works the same as the default `.filter` function, with the exception that it can
 
 ```javascript
 var myPromises = [promise1, promise2];
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .filter(function (value, index) {
     return value > 100;
   });
 ```
 
 ```javascript
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .map(function (value) {
     return new Promise(...)
   });
@@ -100,7 +100,7 @@ Works the same as the default `.forEach` function.
 
 ```javascript
 var myPromises = [promise1, promise2];
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .forEach(function (value, index) {
     // My code
   });
@@ -112,14 +112,14 @@ Works the same as the default `.map` function, with the exception that it can al
 
 ```javascript
 var myPromises = [promise1, promise2];
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .map(function (value, index) {
     return value.toLowerCase();
   });
 ```
 
 ```javascript
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .map(function (value) {
     return new Promise(...)
   });
@@ -130,15 +130,15 @@ PromiseList(myPromises)
 ## Tests
 
 ```
-   1. Promise.List: map (undefined)...................................... ✅
-   2. Promise.List: map (NaN)............................................ ✅
-   3. Promise.List: forEach (should be).................................. ✅
-   4. Promise.List: forEach (not be)..................................... ✅
-   5. Promise.List: filter (not be)...................................... ✅
-   6. Promise.List: filter (should be)................................... ✅
-   7. Promise.List: map & filter (should be)............................. ✅
-   8. Promise.List: map & filter (not be)................................ ✅
-   9. Promise.List: map, filter & forEach (should be).................... ✅
-  10. Promise.List: map, filter & forEach (should not be undefined)...... ✅
-  11. Promise.List: map to promise....................................... ✅
+   1. Promise.Array: map (undefined)..................................... ✅
+   2. Promise.Array: map (NaN)........................................... ✅
+   3. Promise.Array: forEach (should be)................................. ✅
+   4. Promise.Array: forEach (not be).................................... ✅
+   5. Promise.Array: filter (not be)..................................... ✅
+   6. Promise.Array: filter (should be).................................. ✅
+   7. Promise.Array: map & filter (should be)............................ ✅
+   8. Promise.Array: map & filter (not be)............................... ✅
+   9. Promise.Array: map, filter & forEach (should be)................... ✅
+  10. Promise.Array: map, filter & forEach (should not be undefined)..... ✅
+  11. Promise.Array: map to promise...................................... ✅
 ```

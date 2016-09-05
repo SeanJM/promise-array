@@ -26,23 +26,23 @@ function timedPromise(n) {
 
 module.exports = new TinyTest(function (test) {
   if (config.isProduction) {
-    Promise.List = require('../bin/PromiseList.min');
+    Promise.Array = require('../bin/PromiseArray.min');
   } else {
-    Promise.List = require('../bin/PromiseList');
+    Promise.Array = require('../bin/PromiseArray');
   }
 
-  test('Promise.List: map (undefined)')
+  test('Promise.Array: map (undefined)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ]).map(function (value) {})
     )
     .shouldBe([ undefined, undefined ]);
 
-  test('Promise.List: map (NaN)')
+  test('Promise.Array: map (NaN)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -53,9 +53,9 @@ module.exports = new TinyTest(function (test) {
       [ NaN, NaN ]
     );
 
-  test('Promise.List: forEach (should be)')
+  test('Promise.Array: forEach (should be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -66,9 +66,9 @@ module.exports = new TinyTest(function (test) {
       [ 100, 200 ]
     );
 
-  test('Promise.List: forEach (not be)')
+  test('Promise.Array: forEach (not be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -79,9 +79,9 @@ module.exports = new TinyTest(function (test) {
       [ 200, 100 ]
     );
 
-  test('Promise.List: filter (not be)')
+  test('Promise.Array: filter (not be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -92,9 +92,9 @@ module.exports = new TinyTest(function (test) {
       [ 100 ]
     );
 
-  test('Promise.List: filter (should be)')
+  test('Promise.Array: filter (should be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -105,9 +105,9 @@ module.exports = new TinyTest(function (test) {
       [ 200 ]
     );
 
-  test('Promise.List: map & filter (should be)')
+  test('Promise.Array: map & filter (should be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -121,9 +121,9 @@ module.exports = new TinyTest(function (test) {
       [ 40000 ]
     );
 
-  test('Promise.List: map & filter (not be)')
+  test('Promise.Array: map & filter (not be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -137,9 +137,9 @@ module.exports = new TinyTest(function (test) {
       [ 100, 200 ]
     );
 
-  test('Promise.List: map, filter & forEach (should be)')
+  test('Promise.Array: map, filter & forEach (should be)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -156,9 +156,9 @@ module.exports = new TinyTest(function (test) {
       [199]
     );
 
-  test('Promise.List: map, filter & forEach (should not be undefined)')
+  test('Promise.Array: map, filter & forEach (should not be undefined)')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])
@@ -175,9 +175,9 @@ module.exports = new TinyTest(function (test) {
       [undefined, undefined]
     );
 
-  test('Promise.List: map to promise')
+  test('Promise.Array: map to promise')
     .this(
-      new Promise.List([
+      new Promise.Array([
         timedPromise(100).resolve(),
         timedPromise(200).resolve()
       ])

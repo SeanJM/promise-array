@@ -1,4 +1,4 @@
-function PromiseList(list) {
+function PromiseArray(list) {
   var self = this;
   var index = 0;
   var result = {};
@@ -37,7 +37,7 @@ function PromiseList(list) {
     };
   }
 
-  if (!isPromiseList(list)) {
+  if (!isPromiseArray(list)) {
     throw 'Your array must be filled with Promises';
   }
 
@@ -55,27 +55,27 @@ function PromiseList(list) {
   });
 }
 
-PromiseList.prototype.forEach = function (callback) {
+PromiseArray.prototype.forEach = function (callback) {
   this.queue.push(['forEach', callback]);
   return this;
 };
 
-PromiseList.prototype.filter = function (callback) {
+PromiseArray.prototype.filter = function (callback) {
   this.queue.push(['filter', callback]);
   return this;
 };
 
-PromiseList.prototype.map = function (callback) {
+PromiseArray.prototype.map = function (callback) {
   this.queue.push(['map', callback]);
   return this;
 };
 
-PromiseList.prototype.catch = function (callback) {
+PromiseArray.prototype.catch = function (callback) {
   this.method.reject.push(callback);
   return this;
 };
 
-PromiseList.prototype.then = function (callback) {
+PromiseArray.prototype.then = function (callback) {
   this.method.resolve.push(callback);
   return this;
 };

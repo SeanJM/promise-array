@@ -1,5 +1,5 @@
 if (typeof window === 'object') {
-  window.PromiseList = PromiseList;
+  window.PromiseArray = PromiseArray;
 } else if (typeof module === 'object') {
-  module.exports = PromiseList;
+  module.exports = PromiseArray;
 }

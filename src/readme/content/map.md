@@ -2,14 +2,14 @@ Works the same as the default `.map` function, with the exception that it can al
 
 ```javascript
 var myPromises = [promise1, promise2];
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .map(function (value, index) {
     return value.toLowerCase();
   });
 ```
 
 ```javascript
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .map(function (value) {
     return new Promise(...)
   });

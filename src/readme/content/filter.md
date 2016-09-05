@@ -2,14 +2,14 @@ Works the same as the default `.filter` function, with the exception that it can
 
 ```javascript
 var myPromises = [promise1, promise2];
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .filter(function (value, index) {
     return value > 100;
   });
 ```
 
 ```javascript
-PromiseList(myPromises)
+PromiseArray(myPromises)
   .map(function (value) {
     return new Promise(...)
   });

@@ -1,9 +1,9 @@
 ### Browser
-Just download the `PromiseList.min.js` and include it in an HTML `<script>` tag
+Just download the `PromiseArray.min.js` and include it in an HTML `<script>` tag
 
 eg:
 ```html
-<script src="PromiseList.min.js"></script>
+<script src="PromiseArray.min.js"></script>
 ```
 
 ### Node
