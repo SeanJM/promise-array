@@ -144,7 +144,7 @@ Construction of the error array item:
 
 ```
 {
-  item : [ Item in the Array ],
+  promise : [ Rejected Promise ],
   error : [ Error ],
   index : [ Item Index ]
 }
