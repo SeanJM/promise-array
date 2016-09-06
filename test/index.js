@@ -175,11 +175,12 @@ module.exports = new TinyTest(function (test) {
       [undefined, undefined]
     );
 
-  test('Promise.Array: map to promise')
+  test('Promise.Array: map to promise (with rejection)')
     .this(
       new Promise.Array([
         timedPromise(100).resolve(),
-        timedPromise(200).resolve()
+        timedPromise(200).resolve(),
+        timedPromise(200).reject()
       ])
       .map(function (value, index) {
         return new Promise(function (resolve, reject) {

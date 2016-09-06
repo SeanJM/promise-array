@@ -1,8 +1,11 @@
 function isPromiseArray(list) {
-  for (var i = 0, n = list.length; i < n; i++) {
-    if (!isPromise(list[i])) {
-      return false;
+  if (Array.isArray(list)) {
+    for (var i = 0, n = list.length; i < n; i++) {
+      if (!isPromise(list[i])) {
+        return false;
+      }
     }
+    return true;
   }
-  return true;
+  return false;
 }

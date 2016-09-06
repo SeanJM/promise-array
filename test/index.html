@@ -1,8 +1,10 @@
 <html>
   <body>
-    <script src="../bin/PromiseList.js"></script>
+    <script src="../bin/PromiseArray.js"></script>
     <script>
-    Promise.List = PromiseList;
+
+    Promise.Array = PromiseArray;
+
     function timedPromise(n) {
       return {
         resolve : function () {
@@ -22,10 +24,10 @@
       };
     }
 
-    new Promise.List([
+    new Promise.Array([
       timedPromise(300).resolve(),
       timedPromise(100).resolve(),
-      timedPromise(200).resolve()
+      timedPromise(200).reject()
     ])
       .map(function (value) {
         throw 'test';
@@ -33,7 +35,7 @@
       .filter(function (value) {
         return true;
       })
-      .then(function (value) {
+      .then(function (success, failure) {
         console.log(value);
       })
       .catch(function (value) {

@@ -1,4 +1,4 @@
-# Promise Array 1.1.3
+# Promise Array 1.1.4
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
 #### ✅ All 11 tests pass
@@ -15,6 +15,7 @@
 
 #### Content
 
+- [errors](#errors--top)
 - [filter](#filter--top)
 - [forEach](#foreach--top)
 - [map](#map--top)
@@ -74,6 +75,25 @@ PromiseArray(listOfPromises)
   )
 ```
 
+
+### errors ... ([top](#table-of-contents))
+
+When an item in your list does not resolve, it will not trigger a `catch` callback. Instead, once all the items have been attempted, you will get arguments in `resolve`.
+
+- An array of results
+- An array of error objects
+
+Construction of the error array item:
+
+```
+{
+  item : [ Item in the Array ],
+  error : [ Error ],
+  index : [ Item Index ]
+}
+```
+
+The only error which will trigger the `catch` method is going to be if an invalid promise is passed to the constructor.
 
 ### filter ... ([top](#table-of-contents))
 
@@ -140,5 +160,5 @@ PromiseArray(myPromises)
    8. Promise.Array: map & filter (not be)............................... ✅
    9. Promise.Array: map, filter & forEach (should be)................... ✅
   10. Promise.Array: map, filter & forEach (should not be undefined)..... ✅
-  11. Promise.Array: map to promise...................................... ✅
+  11. Promise.Array: map to promise (with rejection)..................... ✅
 ```
