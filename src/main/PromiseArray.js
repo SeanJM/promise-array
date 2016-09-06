@@ -42,7 +42,7 @@ function PromiseArray(list) {
           })
           .catch(function (error) {
             failure[i] = {
-              item : list[i],
+              promise : list[i],
               error : error,
               index : i
             };
