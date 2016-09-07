@@ -1,4 +1,4 @@
-# Promise Array 1.2.4
+# Promise Array 1.2.5
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
 #### ✅ All 12 tests pass
@@ -155,16 +155,16 @@ Construction of the error array item:
 ## Tests
 
 ```
-   1. Promise.Array: map (undefined)..................................... ✅
-   2. Promise.Array: map (NaN)........................................... ✅
-   3. Promise.Array: forEach (should be)................................. ✅
-   4. Promise.Array: forEach (not be).................................... ✅
-   5. Promise.Array: filter (not be)..................................... ✅
-   6. Promise.Array: filter (should be).................................. ✅
-   7. Promise.Array: map & filter (should be)............................ ✅
-   8. Promise.Array: map & filter (not be)............................... ✅
-   9. Promise.Array: map, filter & forEach (should be)................... ✅
-  10. Promise.Array: map, filter & forEach (should not be undefined)..... ✅
-  11. Promise.Array: map to promise (with rejection)..................... ✅
-  12. Promise.Array: Invalid list of promises............................ ✅
+   1. map (undefined).................................................... ✅
+   2. map (NaN).......................................................... ✅
+   3. forEach (should be)................................................ ✅
+   4. forEach (not be)................................................... ✅
+   5. filter (not be).................................................... ✅
+   6. filter (should be)................................................. ✅
+   7. map & filter (should be)........................................... ✅
+   8. map & filter (not be).............................................. ✅
+   9. map, filter & forEach (should be).................................. ✅
+  10. map, filter & forEach (should not be undefined).................... ✅
+  11. map to promise (with rejection).................................... ✅
+  12. Invalid list of promises........................................... ✅
 ```
