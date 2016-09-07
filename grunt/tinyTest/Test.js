@@ -48,9 +48,15 @@ Test.prototype.runTest = function() {
 
   this.isCaught = [ false, false ];
 
-  function maybeB(b_value) {
-    self.b = b_value;
+  function checkFailure() {
+    if (self.isCaught[0] && self.a.toString() === self.b) {
+      self.pass();
+    } else {
+      self.fail();
+    }
+  }
 
+  function checkEquality() {
     if (
       !self.isCaught[0] && !self.isCaught[1]
       && isTypeEqual(self.a, self.b) === self.equality
@@ -59,27 +65,38 @@ Test.prototype.runTest = function() {
     } else {
       self.fail();
     }
+  }
+
+  function maybeRight(b_value) {
+    self.b = b_value;
+
+    if (self.isFailure) {
+      checkFailure();
+    } else {
+      checkEquality();
+    }
 
     self.resolve();
   }
 
-  function maybeA(a_value) {
+  function maybeLeft(a_value) {
     self.a = a_value;
+
     maybePromise(self.b)
       .then(function (b_value) {
-        maybeB(b_value);
+        maybeRight(b_value);
       })
       .catch(function (b_value) {
         self.isCaught[1] = true;
-        maybeB(b_value);
+        maybeRight(b_value);
       });
   }
 
   maybePromise(this.a)
-    .then(maybeA)
+    .then(maybeLeft)
     .catch(function (a_value) {
       self.isCaught[0] = true;
-      maybeA(a_value);
+      maybeLeft(a_value);
     });
 };
 
@@ -91,6 +108,19 @@ Test.prototype.shouldBe = function (value) {
 
 Test.prototype.shouldNotBe = function (value) {
   this.equality = false;
+  this.b = value;
+  this.runTest();
+};
+
+Test.prototype.shouldFail = function (value) {
+  this.isFailure = true;
+
+  if (typeof value !== 'string') {
+    throw (
+      'Invalid argument for \'shouldFail\', the value should be the error message'
+    );
+  }
+
   this.b = value;
   this.runTest();
 };
