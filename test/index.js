@@ -193,4 +193,15 @@ module.exports = new TinyTest(function (test) {
       [200, 400]
     );
 
+  test('Promise.Array: Invalid list of promises')
+    .this(
+      new Promise.Array([
+        timedPromise(100).resolve(),
+        timedPromise(200).resolve(),
+        ''
+      ])
+    ).shouldFail(
+      'Your array must be filled with Promises'
+    );
+
 });
