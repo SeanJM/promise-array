@@ -1,7 +1,7 @@
 # Promise Array 1.2.4
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 11 tests pass
+#### ✅ All 12 tests pass
 
 ## Table of Contents
 
@@ -166,4 +166,5 @@ Construction of the error array item:
    9. Promise.Array: map, filter & forEach (should be)................... ✅
   10. Promise.Array: map, filter & forEach (should not be undefined)..... ✅
   11. Promise.Array: map to promise (with rejection)..................... ✅
+  12. Promise.Array: Invalid list of promises............................ ✅
 ```
